@@ -1,10 +1,10 @@
 Data Analysis App
 A streamlined Python-based web application for performing Exploratory Data Analysis (EDA) and building Machine Learning models with ease.
 🚀 Features
-Data Upload: Support for CSV, Excel, and JSON files.
+Data Upload: Support for CSV, Excel files.
 EDA Suite: Automated descriptive statistics, missing value detection, and correlation matrices.
 Visualizations: Interactive charts including Histograms, Scatter Plots, and Box Plots.
-Machine Learning: Train, evaluate, and compare various regression and classification models.
+Machine Learning: Train, evaluate, and compare regression and classification model.
 Data Cleaning: Simple tools for handling outliers and encoding categorical variables.
 🛠️ Installation
 Clone the repository:
@@ -16,12 +16,10 @@ Use code with caution.
 Install dependencies:
 bash
 pip install -r requirements.txt
-Use code with caution.
 
 Run the app:
 bash
 streamlit run app.py
-Use code with caution.
 
 📋 Requirements
 Python 3.9+
