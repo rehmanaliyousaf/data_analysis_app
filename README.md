@@ -11,7 +11,6 @@ Clone the repository:
 bash
 git clone github.com
 cd your-repo-name
-Use code with caution.
 
 Install dependencies:
 bash
@@ -25,11 +24,10 @@ streamlit run app.py
 Python 3.9+
 Pandas
 Scikit-learn
-Streamlit
-Matplotlib/Seaborn or Plotly
+Matplotlib/Seaborn
 📖 Usage
 Launch the app and upload your dataset via the sidebar.
 Navigate to the EDA tab to understand your data distribution.
 Switch to the ML tab to select your target variable and train a model.
-Download the results or the trained model directly from the interface.
+Download the results or train the model directly from the interface.
 🤝 Contributing
