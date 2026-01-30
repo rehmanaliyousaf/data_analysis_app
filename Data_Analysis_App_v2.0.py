@@ -22,6 +22,7 @@ from sklearn.preprocessing import OneHotEncoder, LabelEncoder, StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
+import streamlit as st
 
 root = tk.Tk()
 root.title("Data Analysis App v2.0 by RAY")
@@ -136,32 +137,37 @@ def openfile():
     """open file from local drive"""
     global dataset, df, file_path
     global LRr2, log_acc, rf_clf_acc, knn_acc, svm_acc
-    LRr2, log_acc, rf_clf_acc, knn_acc, svm_acc = None, None, None, None, None  # Reset Accuracy vars for comparison
-    file_path = filedialog.askopenfilename(
-        filetypes=(
-            ("CSV files", "*.csv"),
-            ("Excel files", "*.xlsx *.xls"),
-            ("All files", "*.*")
-        )
+    LRr2, log_acc, rf_clf_acc, knn_acc, svm_acc = None, None, None, None, None #Reset Accuracy vars for comparison
+    
+    
+
+    # 1. Use st.file_uploader to accept the same file types
+    uploaded_file = st.file_uploader(
+        "Choose a file", 
+        type=["csv", "xlsx", "xls"]
     )
-
-    if file_path:
+    
+    # 2. Process the file buffer if a file was uploaded
+    if uploaded_file is not None:
         try:
-            if file_path.endswith('.csv'):
-                dataset = pd.read_csv(file_path)
-            elif file_path.endswith('.xlsx') or file_path.endswith('.xls'):
-                dataset = pd.read_excel(file_path)
-            else:
-                print("Unsupported file type selected.")
+            # Instead of checking a path string, we check the file's name property
+            if uploaded_file.name.endswith('.csv'):
+                dataset = pd.read_csv(uploaded_file)
+            elif uploaded_file.name.endswith(('.xlsx', '.xls')):
+                dataset = pd.read_excel(uploaded_file)
+            
+            # Create your copy
             df = dataset.copy()
-            file_name = Path(file_path).stem
-            show_box(f"File \"{file_name}\" uploaded Successfully")
+            
+            # Display the data to confirm it loaded
+            st.success(f"Successfully loaded: {uploaded_file.name}")
+            st.dataframe(df.head())
+            
         except Exception as e:
-            messagebox.showinfo("File Error", f"Error reading file: {e}")
-
+            st.error(f"Error loading file: {e}")
     else:
-        messagebox.showinfo("File Error", "No file selected.")
-
+        st.info("Please upload a CSV or Excel file to proceed.")
+        
 
 openfile()
 
@@ -1170,4 +1176,5 @@ def ml_compare():
 
 
 # ------------------------------
+
 root.mainloop()
